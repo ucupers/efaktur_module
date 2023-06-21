@@ -81,7 +81,8 @@
                         <page string="Product">
                             <field name="algoritma_pembelian_ids" nolabel='1' options="{'reload_on_button' : True}">
                                 <tree edit="True" editable="bottom" create="True" delete="True">
-                                    <field name="product_id"/>
+                                    <!--untuk domain bisa seperti di bawah atau di file .py pake func-->
+                                    <field name="product_id" domain="[('type', '=', 'product')]"/>
                                     <field name="description"/>
                                     <field name="quantity"/>
                                     <field name="uom_id"/>

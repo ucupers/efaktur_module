@@ -4,6 +4,8 @@
     <record id="pembelian_actions_id" model="ir.actions.act_window">
         <field name="name">Pembelian</field>
         <field name="res_model">algoritma.pembelian</field>
+        <!--di bawah ini untuk memasukan domain ke action-->
+        <!--field name="domain">[('status', '=', 'draft')]</field-->
     </record>
 
     <!--set action untuk tree view untuk melihat data tabel-->
