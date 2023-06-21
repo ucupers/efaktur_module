@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
+    <!--untuk pembuatan sebuah sequence / urutan baru-->
     <record id="sequence_algoritma_pembelian_id" model="ir.sequence">
         <field name="name">Sequence Algoritma Pembelian</field>
+        <!--untuk refer ke code mana-->
         <field name="code">algoritma.pembelian</field>
+        <!--untuk pembuatan nama di sequencenya (ex: AP/2023/06/xxx)-->
         <field name="prefix">AP/%(year)s/%(month)s/</field>
         <field eval="1" name="number_next"/>
         <field eval="1" name="number_increment"/>
         <field eval="True" name="use_date_range"/>
         <field name="company_id" eval="False"/>
+        <!--padding buat nomor di akhir sequence (ex: 6 brarti 000001 awalnya)-->
         <field name="padding">6</field>
     </record>
 </odoo>

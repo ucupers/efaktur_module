@@ -9,8 +9,19 @@
             id="child_algoritma_pembelian_id"
             name="Pembelian"
             sequence="1"
-            parent="algoritma_pembelian.parent_algoritma_pembelian_id"
-            action="algoritma_pembelian.pembelian_actions_id"/>
+            parent="algoritma_pembelian.parent_algoritma_pembelian_id"/>
+            <menuitem 
+                id="child_algoritma_pembelian_a_id"
+                name="Pembelian A"
+                sequence="11"
+                parent="algoritma_pembelian.child_algoritma_pembelian_id"
+                action="algoritma_pembelian.pembelian_actions_id"/>
+            <menuitem 
+                id="child_algoritma_pembelian_b_id"
+                name="Pembelian B"
+                sequence="12"
+                parent="algoritma_pembelian.child_algoritma_pembelian_id"
+                action="algoritma_pembelian.actions_server_algoritma_pembelian_show_tree_view"/>
         <menuitem 
             id="child_algoritma_brand_id"
             name="Brand"

@@ -47,6 +47,7 @@
         <field name="act_window_id" ref="algoritma_pembelian.brand_actions_id"/>
     </record>
 
+    <!--Wizard view untuk menampilkan Pop-up menu-->
     <record id="report_wizard_actions_id" model="ir.actions.act_window">
         <field name="name">Report Algoritma Pembelian</field>
         <field name="res_model">algoritma.pembelian.report.wizard</field>
@@ -57,5 +58,21 @@
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">No Data</p>
         </field>
+    </record>
+
+    <!--untuk melakukan select dan melakukan perubahan pada beberapa data sekaligus-->
+    <record id="actions_server_algoritma_pembelian_to_approve" model="ir.actions.server">
+        <field name="name">To Approve</field>
+        <field name="model_id" ref="algoritma_pembelian.model_algoritma_pembelian"/>
+        <field name="binding_model_id" ref="algoritma_pembelian.model_algoritma_pembelian"></field>
+        <field name="state">code</field>
+        <field name="code">action=records.func_to_approve()</field>
+    </record>
+
+    <record id="actions_server_algoritma_pembelian_show_tree_view" model="ir.actions.server">
+        <field name="name">Show Tree View</field>
+        <field name="model_id" ref="algoritma_pembelian.model_algoritma_pembelian"/>
+        <field name="state">code</field>
+        <field name="code">action=model.show_tree_view()</field>
     </record>
 </odoo>
