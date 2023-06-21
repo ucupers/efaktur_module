@@ -154,4 +154,35 @@
             </tree>
         </field>
     </record>
+
+    <!--view untuk melihat model yang di-inherit-->
+    <record id="new_inherit_product_template_id" model="ir.ui.view">  
+        <field name="name">new_inherit_product_template_id</field>
+        <field name="model">product.template</field>
+        <!--inherit_id didapat dari developer mode (edit view: form) bagian external ID-->
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <!--expr dipake untuk reference mau ditaro di bagian mana (ex: header / sheet)-->
+            <!--position menentukan di bagian mananya (ex: inside -> di dalem bagian itu, before -> sebelum bagian itu)-->
+            <xpath expr="//form/header" position="inside">
+                <!--yang bagian ini di bagian dalem header di bagian akhir-->
+                <button name="func_approved" string="Approved" type="object" class="oe_highlight"/>
+                <field name="status" widget="statusbar"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--view untuk melihat model yang di-inherit-->
+    <record id="new_inherit_stock_product_template_id" model="ir.ui.view">  
+        <field name="name">new_inherit_stock_product_template_id</field>
+        <field name="model">product.template</field>
+        <!--inherit_id didapat dari inherited views kalo misal yang dituju tidak ada di view awal-->
+        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <!--yang bagian ini sebelum button yang direfer di expr-->
+            <xpath expr="//form/header/button[@name='action_update_quantity_on_hand']" position="before">
+                <button name="func_approved" string="Approved" type="object" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

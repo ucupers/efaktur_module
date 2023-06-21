@@ -99,3 +99,13 @@ class algoritma_pembelian_report_wizard(models.TransientModel):
     name = fields.Char(string="Name")
     periode_awal = fields.Date(string="Periode Awal")
     periode_akhir = fields.Date(strin="Periode Akhir")
+
+# Class untuk inheritance model
+class product_template(models.Model):
+    _inherit = 'product.template'
+
+    def func_approved(self):
+        if self.status == 'draft':
+            self.status = 'approved'
+
+    status = fields.Selection([('draft','Draft'),('approved','Approved'),('done','Done')], string="Status", default="draft")
