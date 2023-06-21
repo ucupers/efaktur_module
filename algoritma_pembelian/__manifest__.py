@@ -7,7 +7,7 @@
         Ini adalah module addons untuk connect ke E-Faktur
     """,
     'author' : 'Ryu & Raihan',
-    'depends' : ['web', 'base'],
+    'depends' : ['web', 'base', 'product'], # depends dipake buat pake module laen di modul ini
     'data' : [
         'security/ir.model.access.csv',
         'views/algoritma_pembelian_view.xml',
