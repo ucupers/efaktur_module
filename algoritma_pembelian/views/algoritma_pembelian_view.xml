@@ -48,7 +48,7 @@
         </field>
     </record>
 
-    <!--view pada saat menginput data baru-->
+    <!--view pada saat menginput data baru (form)-->
     <record id="algoritma_pembelian_form_view_id" model="ir.ui.view">
         <field name="name">algoritma_pembelian_form_view_id</field>
         <field name="model">algoritma.pembelian</field>
@@ -77,6 +77,7 @@
                             <field name="algoritma_pembelian_ids" nolabel='1' options="{'reload_on_button' : True}">
                                 <tree edit="True" editable="bottom" create="True" delete="True">
                                     <field name="product_id"/>
+                                    <field name="description"/>
                                     <field name="quantity"/>
                                     <field name="uom_id"/>
                                 </tree>
