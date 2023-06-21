@@ -46,4 +46,16 @@
         <field name="view_id" ref="algoritma_pembelian.algoritma_brand_tree_view_id"/>
         <field name="act_window_id" ref="algoritma_pembelian.brand_actions_id"/>
     </record>
+
+    <record id="report_wizard_actions_id" model="ir.actions.act_window">
+        <field name="name">Report Algoritma Pembelian</field>
+        <field name="res_model">algoritma.pembelian.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="algoritma_pembelian.algoritma_pembelian_report_wizard_view_id"/>
+        <field name="target">new</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">No Data</p>
+        </field>
+    </record>
 </odoo>

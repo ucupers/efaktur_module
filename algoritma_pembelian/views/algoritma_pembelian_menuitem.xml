@@ -14,7 +14,13 @@
         <menuitem 
             id="child_algoritma_brand_id"
             name="Brand"
-            sequence="2 "
+            sequence="2"
             parent="algoritma_pembelian.parent_algoritma_pembelian_id"
             action="algoritma_pembelian.brand_actions_id"/>
+        <menuitem 
+            id="child_algoritma_pembelian_report_wizard_id"
+            name="Report"
+            sequence="3"
+            parent="algoritma_pembelian.parent_algoritma_pembelian_id"
+            action="algoritma_pembelian.report_wizard_actions_id"/>
 </odoo>

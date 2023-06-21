@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
+    <!--view untuk wizard view / Pop-up view-->
+    <record id="algoritma_pembelian_report_wizard_view_id" model="ir.ui.view">  
+        <field name="name">algoritma_pembelian_report_wizard_view_id</field>
+        <field name="model">algoritma.pembelian.report.wizard</field>
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <form string="Reporting Algoritma Pembelian">
+                <sheet>
+                    <group col="4">
+                        <field name="periode_awal" string="Periode Awal"/>
+                        <field name="periode_akhir" string="Periode Akhir"/>
+                    </group>
+                </sheet>
+                <footer>
+                <!--<button type="object" name="" string="Submit" class="btn-primary"/> -->
+                    <!--button cancel sudah terprogram dari sananya (default / tinggal pake yg bawah)-->
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
     <!--view hasil search-->
     <record id="algoritma_pembelian_search_view_id" model="ir.ui.view">  
         <field name="name">algoritma_pembelian_search_view_id</field>
