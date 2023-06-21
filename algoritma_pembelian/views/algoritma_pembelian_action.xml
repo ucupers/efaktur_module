@@ -14,9 +14,17 @@
         <field name="act_window_id" ref="algoritma_pembelian.pembelian_actions_id"/>
     </record>
 
+    <!--set action untuk kanban view untuk melihat data tabel-->
+    <record id="pembelian_actions_kanban_view_id" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="algoritma_pembelian.algoritma_pembelian_kanban_view_id"/>
+        <field name="act_window_id" ref="algoritma_pembelian.pembelian_actions_id"/>
+    </record>
+
     <!--set action untuk form view saat mengisi data-->
     <record id="pembelian_actions_form_view_id" model="ir.actions.act_window.view">
-        <field name="sequence" eval="2"/>
+        <field name="sequence" eval="3"/>
         <field name="view_mode">form</field>
         <field name="view_id" ref="algoritma_pembelian.algoritma_pembelian_form_view_id"/>
         <field name="act_window_id" ref="algoritma_pembelian.pembelian_actions_id"/>

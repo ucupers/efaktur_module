@@ -15,6 +15,39 @@
         </field>
     </record>
 
+    <!--view untuk kanban-->
+    <record id="algoritma_pembelian_kanban_view_id" model="ir.ui.view">  
+        <field name="name">algoritma_pembelian_kanban_view_id</field>
+        <field name="model">algoritma.pembelian</field>
+        <field name="arch" type="xml">
+            <!--tree digunakan untuk data apa saja yang dikasih tunjuk dari tabel-->
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="tanggal"/>
+                <field name="status"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <!--Untuk bagian atas-->
+                            <div class="o_kanban_record_top mb16">
+                                <strong><span><t t-esc="record.name.value"/></span></strong>
+                            </div>
+                            <!--Untuk bagian bawah-->
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <span><t t-esc="record.tanggal.value"/></span>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <span><t t-esc="record.status.value"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <!--view pada saat menginput data baru-->
     <record id="algoritma_pembelian_form_view_id" model="ir.ui.view">
         <field name="name">algoritma_pembelian_form_view_id</field>
