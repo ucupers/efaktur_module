@@ -11,4 +11,10 @@
             sequence="1"
             parent="algoritma_pembelian.parent_algoritma_pembelian_id"
             action="algoritma_pembelian.pembelian_actions_id"/>
+        <menuitem 
+            id="child_algoritma_brand_id"
+            name="Brand"
+            sequence="2 "
+            parent="algoritma_pembelian.parent_algoritma_pembelian_id"
+            action="algoritma_pembelian.brand_actions_id"/>
 </odoo>

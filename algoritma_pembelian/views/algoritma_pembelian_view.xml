@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
-    <!--view untuk melihat tabel database-->
+    <!--view untuk melihat tabel database pembelian-->
     <record id="algoritma_pembelian_tree_view_id" model="ir.ui.view">  
         <field name="name">algoritma_pembelian_tree_view_id</field>
         <field name="model">algoritma.pembelian</field>
@@ -20,7 +20,7 @@
         <field name="name">algoritma_pembelian_kanban_view_id</field>
         <field name="model">algoritma.pembelian</field>
         <field name="arch" type="xml">
-            <!--tree digunakan untuk data apa saja yang dikasih tunjuk dari tabel-->
+            <!--kanban digunakan untuk melihat data tabel berbentuk kotak2-->
             <kanban class="o_kanban_mobile">
                 <field name="name"/>
                 <field name="tanggal"/>
@@ -64,11 +64,14 @@
                         <!--group dipake buat misahin (ex: bag kiri dan bag kanan)-->
                         <group>
                             <field name="name"/>
+                            <!--widget many2many_tags memperlihatkan apa saja yang telah dipilih-->
+                            <field name="brand_ids" widget="many2many_tags"/>
                         </group>
                         <group>
                             <field name="tanggal"/>
                         </group>
                     </group>
+                    <!--notebook untuk memberikan view halaman2 seperti list benda-->
                     <notebook>
                         <page string="Product">
                             <field name="algoritma_pembelian_ids" nolabel='1' options="{'reload_on_button' : True}">
@@ -82,6 +85,17 @@
                     </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!--view untuk melihat tabel database brand-->
+    <record id="algoritma_brand_tree_view_id" model="ir.ui.view">  
+        <field name="name">algoritma_brand_tree_view_id</field>
+        <field name="model">algoritma.brand</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+            </tree>
         </field>
     </record>
 </odoo>
