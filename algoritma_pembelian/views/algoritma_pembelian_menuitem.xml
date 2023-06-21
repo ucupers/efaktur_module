@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <menuitem
+        id="parent_algoritma_pembelian_id"
+        name="Pembelian"
+        sequence="5"/>
+        <menuitem 
+            id="child_algoritma_pembelian_id"
+            name="Pembelian"
+            sequence="1"
+            parent="algoritma_pembelian.parent_algoritma_pembelian_id"
+            action="algoritma_pembelian.pembelian_actions_id"/>
+</odoo>

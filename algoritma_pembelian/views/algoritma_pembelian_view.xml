@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!--view untuk melihat tabel database-->
+    <record id="algoritma_pembelian_tree_view_id" model="ir.ui.view">  
+        <field name="name">algoritma_pembelian_tree_view_id</field>
+        <field name="model">algoritma.pembelian</field>
+        <field name="arch" type="xml">
+            <!--tree digunakan untuk data apa saja yang dikasih tunjuk dari tabel-->
+            <tree>
+                <field name="name"/>
+                <field name="tanggal"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--view pada saat menginput data baru-->
+    <record id="algoritma_pembelian_form_view_id" model="ir.ui.view">
+        <field name="name">algoritma_pembelian_form_view_id</field>
+        <field name="model">algoritma.pembelian</field>
+        <field name="arch" type="xml">
+            <form>
+                <!--header untuk bagian atas (ngasih liat doang)-->
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <!--sheet untuk bagian yang diisi-->
+                <sheet>
+                    <group>
+                        <!--group dipake buat misahin (ex: bag kiri dan bag kanan)-->
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="tanggal"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
