@@ -8,13 +8,17 @@ class algoritma_pembelian(models.Model): # pembuatan tabel baru
         self.status = 'draft'
     def func_to_approve(self):
         self.status = 'to_approve'
+        # Code untuk run sequence yang sudah dibuat
+        if self.name == 'New':
+            seq = self.env['ir.sequence'].next_by_code('algoritma.pembelian') or 'New'
+            self.name = seq
     def func_approved(self):
         self.status = 'approved'
     def func_done(self):
         self.status = 'done'
 
     # attribut yang ada pada tabel tersebut
-    name = fields.Char(string='Name') # Char untuk String
+    name = fields.Char(string='Name', default="New") # Char untuk String
     tanggal = fields.Date(string='Tanggal') # Date untuk milih tanggal
     # Selection untuk yang ada pilihannya
     status = fields.Selection([('draft','Draft'),('to_approve','To Approve'),('approved','Approved'),('done','Done')], default="draft")
