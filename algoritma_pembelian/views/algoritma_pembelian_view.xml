@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
+    <!--view hasil search-->
+    <record id="algoritma_pembelian_search_view_id" model="ir.ui.view">  
+        <field name="name">algoritma_pembelian_search_view_id</field>
+        <field name="model">algoritma.pembelian</field>
+        <field name="arch" type="xml">
+            <search>
+                <!--untuk set pencarian bisa pake apa-->
+                <field name="name" string="Name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="algoritma_pembelian_ids" string="Product" filter_domain="[('algoritma_pembelian_ids.product_id.name', 'ilike', self)]"/>
+                
+                <!--untuk set bisa filter pake apa aja-->
+                <filter string="Draft" name="status" domain="[('status', '=', 'draft')]"/>
+                <filter string="To Approve" name="status" domain="[('status', '=', 'to_approve')]"/>
+                <filter string="Approved" name="status" domain="[('status', '=', 'approved')]"/>
+                <filter string="Done" name="status" domain="[('status', '=', 'done')]"/>
+
+                <!--untuk set group by pake apa aja-->
+                <group string="Group By">
+                    <filter string="Status" name="status" domain="[]" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!--view untuk melihat tabel database pembelian-->
     <record id="algoritma_pembelian_tree_view_id" model="ir.ui.view">  
         <field name="name">algoritma_pembelian_tree_view_id</field>
@@ -82,7 +106,8 @@
                             <field name="algoritma_pembelian_ids" nolabel='1' options="{'reload_on_button' : True}">
                                 <tree edit="True" editable="bottom" create="True" delete="True">
                                     <!--untuk domain bisa seperti di bawah atau di file .py pake func-->
-                                    <field name="product_id" domain="[('type', '=', 'product')]"/>
+                                <!--<field name="product_id" domain="[('type', '=', 'product')]"/>-->
+                                    <field name="product_id"/>
                                     <field name="description"/>
                                     <field name="quantity"/>
                                     <field name="uom_id"/>

@@ -5,7 +5,10 @@
         <field name="name">Pembelian</field>
         <field name="res_model">algoritma.pembelian</field>
         <!--di bawah ini untuk memasukan domain ke action-->
-        <!--field name="domain">[('status', '=', 'draft')]</field-->
+<!--    <field name="domain">[('status', '=', 'draft')]</field> -->
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_group_status': 1}</field>
+        <field name="search_view_id" ref="algoritma_pembelian.algoritma_pembelian_search_view_id"/>
     </record>
 
     <!--set action untuk tree view untuk melihat data tabel-->
