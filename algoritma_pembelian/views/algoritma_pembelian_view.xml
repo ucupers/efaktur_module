@@ -56,10 +56,11 @@
             <form>
                 <!--header untuk bagian atas (ngasih liat doang)-->
                 <header>
-                    <button type="object" name="func_draft" string="Draft" class="oe_highlight"/>
-                    <button type="object" name="func_to_approve" string="To Approve" class="oe_highlight"/>
-                    <button type="object" name="func_approved" string="Approved" class="oe_highlight"/>
-                    <button type="object" name="func_done" string="Done" class="oe_highlight"/>
+                    <!--attrs digunakan untuk memberi atribut ketika terjadi sesuatu (untuk invisible, read only, dan required)-->
+                    <button type="object" name="func_draft" string="Draft" attrs="{'invisible': [('status', '=', 'draft')]}" class="oe_highlight"/>
+                    <button type="object" name="func_to_approve" string="To Approve" attrs="{'invisible': [('status', '=', 'to_approve')]}" class="oe_highlight"/>
+                    <button type="object" name="func_approved" string="Approved" attrs="{'invisible': [('status', '=', 'approved')]}" class="oe_highlight"/>
+                    <button type="object" name="func_done" string="Done" attrs="{'invisible': [('status', '=', 'done')]}" class="oe_highlight"/>
                     <field name="status" widget="statusbar"/>
                 </header>
                 <!--sheet untuk bagian yang diisi-->
@@ -67,9 +68,9 @@
                     <group>
                         <!--group dipake buat misahin (ex: bag kiri dan bag kanan)-->
                         <group>
-                            <field name="name"/>
+                            <field name="name" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
                             <!--widget many2many_tags memperlihatkan apa saja yang telah dipilih-->
-                            <field name="brand_ids" widget="many2many_tags"/>
+                            <field name="brand_ids" widget="many2many_tags" attrs="{'required': [('status', '=', 'draft')], 'readonly': [('status', '!=', 'draft')]}"/>
                         </group>
                         <group>
                             <field name="tanggal"/>
