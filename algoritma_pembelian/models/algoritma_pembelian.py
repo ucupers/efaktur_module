@@ -25,12 +25,19 @@ class algoritma_pembelian_line(models.Model):
         else:
             self.description = self.product_id.name
         return {}
+    
+    def _func_amount_total(self):
+        for line in self:
+            line.sub_total = line.quantity * line.price
 
     # Many2one untuk data yang dikumpulkan ke 1 model (ex: id di sini masuk ke ids)
     algoritma_pembelian_id = fields.Many2one('algoritma.pembelian', string="Algoritma Pembelian Id")
     product_id = fields.Many2one('product.product', string="Product Id")
     description = fields.Char(string="Description")
     quantity = fields.Float(string="Quantity", default=0.0)
+    price = fields.Float(string="Price", default=0.0)
+    # Field compute digunakan untuk memberikan data tergantung data lainnya, menggunakan func yg sudah didefinisikan 
+    sub_total = fields.Float(string="Sub Total", compute=_func_amount_total)
     uom_id = fields.Many2one('uom.uom', string="Uom Id")
 
 class algoritma_brand(models.Model):
