@@ -56,6 +56,10 @@
             <form>
                 <!--header untuk bagian atas (ngasih liat doang)-->
                 <header>
+                    <button type="object" name="func_draft" string="Draft" class="oe_highlight"/>
+                    <button type="object" name="func_to_approve" string="To Approve" class="oe_highlight"/>
+                    <button type="object" name="func_approved" string="Approved" class="oe_highlight"/>
+                    <button type="object" name="func_done" string="Done" class="oe_highlight"/>
                     <field name="status" widget="statusbar"/>
                 </header>
                 <!--sheet untuk bagian yang diisi-->

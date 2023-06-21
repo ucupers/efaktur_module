@@ -4,6 +4,15 @@ class algoritma_pembelian(models.Model): # pembuatan tabel baru
     # nama tabelnya
     _name = 'algoritma.pembelian'
 
+    def func_draft(self):
+        self.status = 'draft'
+    def func_to_approve(self):
+        self.status = 'to_approve'
+    def func_approved(self):
+        self.status = 'approved'
+    def func_done(self):
+        self.status = 'done'
+
     # attribut yang ada pada tabel tersebut
     name = fields.Char(string='Name') # Char untuk String
     tanggal = fields.Date(string='Tanggal') # Date untuk milih tanggal
