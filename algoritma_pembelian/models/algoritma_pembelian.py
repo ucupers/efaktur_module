@@ -1,19 +1,45 @@
 from odoo import models, fields, api, _
+from datetime import date
+from odoo.exceptions import ValidationError
 
 class algoritma_pembelian(models.Model): # pembuatan tabel baru
     # nama tabelnya
     _name = 'algoritma.pembelian'
 
+    # Pembuatan Error Message (Raise)
+    @api.model
+    def create(self, values):
+        res = super(algoritma_pembelian, self).create(values)
+        for rec in res:
+            tanggal_pembelian = rec.tanggal
+            tanggal_skrng = date.today()
+            if tanggal_pembelian < tanggal_skrng:
+                raise ValidationError(_("Tanggal yang anda inputkan tidak boleh kurang dari tanggal sekarang"))
+        return res
+    
+    def write(self, values):
+        res = super(algoritma_pembelian, self).write(values)
+        if 'tanggal' in values:
+            tanggal_pembelian = self.tanggal
+            tanggal_skrng = date.today()
+            if tanggal_pembelian < tanggal_skrng:
+                raise ValidationError(_("Tanggal yang anda inputkan tidak boleh kurang dari tanggal sekarang"))
+        return res
+
+    # Untuk button di form view
     def func_draft(self):
         self.status = 'draft'
+
     def func_to_approve(self):
         self.status = 'to_approve'
         # Code untuk run sequence yang sudah dibuat
         if self.name == 'New':
             seq = self.env['ir.sequence'].next_by_code('algoritma.pembelian') or 'New'
             self.name = seq
+
     def func_approved(self):
         self.status = 'approved'
+
     def func_done(self):
         self.status = 'done'
 
