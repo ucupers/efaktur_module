@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="algoritma_pembelian_tree_view_id" model="ir.ui.view">
+            <field name="name">algoritma_pembelian_tree_view_id</field>
+            <field name="model">algoritma.pembelian</field>
+            <field name="inherit_id" ref="algoritma_pembelian.algoritma_pembelian_tree_view_id"/>
+            <field name="arch" type="xml">
+                <tree >
+                    <header>
+                        <button type="object" name="custom_button" string="Export" class="oe_highlight" />
+                    </header>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
