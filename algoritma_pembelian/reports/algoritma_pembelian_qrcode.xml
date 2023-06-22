@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <report 
+        id="report_master_product_qrcode"
+        model="product.template"
+        string="Product QR Code"
+        report_type="qweb-pdf"
+        name="algoritma_pembelian.report_algoritma_pembelian_qrcode_id"
+        file="algoritma_pembelian.report_algoritma_pembelian_qrcode_id"/>
+    
+    <record id="paperformat_product_qrcode_id" model="report.paperformat">
+        <field name="name">Product QR Code</field>
+        <field name="format">custom</field>
+        <field name="page_height">18</field>
+        <field name="page_width">17</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">150</field>
+    </record>
+
+    <record id="algoritma_pembelian.report_master_product_qrcode" model="ir.actions.report">
+        <field name="paperformat_id" ref="algoritma_pembelian.paperformat_product_qrcode_id"/>
+    </record>
+
+    <template id="report_algoritma_pembelian_qrcode_id">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="row">
+                        <p style="font-size: 8px; font-weight: bold; padding: 5px;">
+                            <!--pada type, bila ingin jadi QRcode maka masukan type QR, bila ingin jadi Barcode maka masukan type EAN13-->
+                            <!--sementara QRcode dan Barcode yang muncul tidak ada, akan dicari permasalahannya bila dianggap perlu nanti-->
+                            <img t-if="o.product_qrcode"
+                                t-att-src="'http://localhost:8069/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.product_qrcode, 200, 200)"
+                                style="width: 102px; height: 102px; float: left;"/>
+                            <img t-if="o.product_qrcode"
+                                t-att-src="'http://localhost:8069/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.product_qrcode, 200, 200)"
+                                style="width: 102px; height: 102px; float: left;"/>
+                        </p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -183,6 +183,7 @@
             <!--yang bagian ini sebelum button yang direfer di expr-->
             <xpath expr="//form/header/button[@name='action_update_quantity_on_hand']" position="before">
                 <button name="func_approved" string="Approved" type="object" class="oe_highlight"/>
+                <button name="print_qrcode" string="Print QR Code" type="object" class="oe_highlight"/>
             </xpath>
         </field>
     </record>
