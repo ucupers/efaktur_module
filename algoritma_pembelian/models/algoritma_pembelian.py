@@ -6,6 +6,15 @@ class algoritma_pembelian(models.Model): # pembuatan tabel baru
     # nama tabelnya
     _name = 'algoritma.pembelian'
 
+    # func untuk redirect ke kontroller
+    def get_excel_report(self):
+        # redirect to controller /algoritma_pembelian/algoritma_pembelian_report_excel/
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/algoritma_pembelian/algoritma_pembelian_report_excel/%s' % (self.id),
+            'target': 'new'
+        }
+
     # func untuk melakukan delete pada data dengan status draft
     def func_delete_status_draft(self):
         algoritma_pembelian_obj = self.env['algoritma.pembelian'].search([('status', '=', 'draft')])
