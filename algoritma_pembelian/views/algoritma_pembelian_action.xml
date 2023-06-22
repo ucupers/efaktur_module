@@ -60,6 +60,7 @@
         </field>
     </record>
 
+    <!--Action Server (aksi di server)-->
     <!--untuk melakukan select dan melakukan perubahan pada beberapa data sekaligus-->
     <record id="actions_server_algoritma_pembelian_to_approve" model="ir.actions.server">
         <field name="name">To Approve</field>
@@ -69,6 +70,8 @@
         <field name="code">action=records.func_to_approve()</field>
     </record>
 
+    <!--Action Server (aksi di server)-->
+    <!--untuk mengubah tree view menjadi yang lain-->
     <record id="actions_server_algoritma_pembelian_show_tree_view" model="ir.actions.server">
         <field name="name">Show Tree View</field>
         <field name="model_id" ref="algoritma_pembelian.model_algoritma_pembelian"/>

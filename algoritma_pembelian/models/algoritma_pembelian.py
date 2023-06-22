@@ -6,6 +6,15 @@ class algoritma_pembelian(models.Model): # pembuatan tabel baru
     # nama tabelnya
     _name = 'algoritma.pembelian'
 
+    # func untuk melakukan delete pada data dengan status draft
+    def func_delete_status_draft(self):
+        algoritma_pembelian_obj = self.env['algoritma.pembelian'].search([('status', '=', 'draft')])
+        for line in algoritma_pembelian_obj:
+            # unlink untuk delete data
+            line.unlink()
+        return True
+
+    # func untuk menampilkan tree view dengan filter yang lain
     def show_tree_view(self):
         tree_view_id = self.env['ir.model.data']._xmlid_to_res_id('algoritma_pembelian.algoritma_pembelian_tree_view_id')
         form_view_id = self.env['ir.model.data']._xmlid_to_res_id('algoritma_pembelian.algoritma_pembelian_form_view_id')

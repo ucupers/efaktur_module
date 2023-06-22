@@ -13,7 +13,8 @@
         'views/algoritma_pembelian_view.xml',
         'views/algoritma_pembelian_action.xml',
         'views/algoritma_pembelian_menuitem.xml',
-        'views/algoritma_pembelian_sequence.xml'
+        'views/algoritma_pembelian_sequence.xml',
+        'views/algoritma_pembelian_cron.xml'
     ],
     'installable' : True,
     'application' : True,

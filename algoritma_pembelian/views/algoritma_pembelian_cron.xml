@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!--Untuk membuat sebuah cron / scheduler (melakukan func secara otomatis di range date tertentu)-->
+    <!--Untuk cek daftar scheduled actions, bisa ke settings > technical > scheduled action (dan bisa run manually dari sana)-->
+    <data noupdate="0">
+        <record id="delete_algoritma_pembelian_cron_id" model="ir.cron">
+            <field name="name">Delete Algoritma Pembelian</field>
+            <field name="model_id" ref="algoritma_pembelian.model_algoritma_pembelian"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.func_delete_status_draft()</field>
+            <!--berdasarkan di bawah, intervalnya jadi 1 hari-->
+            <!--misal interval_number jadi 7, berarti sekali setiap 7 hari-->
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <!--numbercall dipake buat berapa kali dicall-->
+            <field name="numbercall">-1</field>
+            <!--untuk set setiap jam brapanya (dalam UTC)-->
+            <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 15:00:00')"/>
+            <field name="priority">999</field>
+            <!--active true brarti nyala, false brarti mati-->
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+    </data>
+</odoo>
