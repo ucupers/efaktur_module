@@ -1,6 +1,26 @@
 from odoo import models, fields, api, _
-from datetime import date
+from datetime import date, datetime
 from odoo.exceptions import ValidationError
+
+import xlrd, base64, os
+
+def load_data(sheet):
+    data = []
+    offset = 0
+    for row in range(sheet.nrows):
+        if row - offset == 0:
+            col_codes = []
+            for col in range(sheet.ncols):
+                value = sheet.cell(row, col).value
+                if type(value) == str:
+                    value = value.strip()
+                col_codes.append(value)
+        elif row - offset > 0:
+            new_line = {}
+            for col in range(sheet.ncols):
+                new_line[col_codes[col]] = sheet.cell(row, col).value
+            data.append(new_line)
+    return data
 
 class algoritma_pembelian(models.Model): # pembuatan tabel baru
     # nama tabelnya
@@ -155,3 +175,114 @@ class product_template(models.Model):
 
     status = fields.Selection([('draft','Draft'),('approved','Approved'),('done','Done')], string="Status", default="draft")
     product_qrcode = fields.Char(string="Product QR Code", compute=_get_product_qrcode)
+
+class base_import(models.TransientModel):
+    _inherit = "base_import.import"
+
+    file_import = fields.Binary(string="File Import")
+    file_name_import = fields.Char(string="File Name Import")
+
+    def action_import_algoritma_pembelian(self):
+        data_product = []
+        dict_algoritma_pembelian = {}
+        algoritma_pembelian_obj = self.env['algoritma.pembelian']
+        if self.file_import:
+            filename, file_extension = os.path.splitext(self.file_name_import)
+            if file_extension == '.xlsx' or file_extension == '.xls':
+                book = xlrd.open_workbook(file_contents=base64.decodebytes(self.file_import))
+                sheet = book.sheet_by_index(0)
+                data = load_data(sheet)
+                for row in data:
+                    # Pengambilan data tanggal
+                    check_tanggal = row['Tanggal']
+                    type_check_tanggal = type(check_tanggal)
+                    if type_check_tanggal == float:
+                        calculation_tanggal = (check_tanggal - 25569) * 86400
+                        tanggal = datetime.utcfromtimestamp(calculation_tanggal).date()
+                    else:
+                        tanggal = check_tanggal.strip()
+                    
+                    # Pengambilan data brand
+                    check_brands = row['Brands'].strip()
+                    brands = []
+                    if check_brands != '':
+                        get_name_brand = []
+                        split_brand = check_brands.split(',')
+                        for i in split_brand:
+                            get_name_brand.append(i.strip())
+                            brands_obj = self.env['algoritma.brand'].search([('name', 'in', get_name_brand)])
+                            brands = brands_obj.ids
+                    
+                    # Pengambilan data product
+                    check_product = row['Product'].strip()
+                    if check_product != '':
+                        split_product = str(check_product).split(' ')[0]
+                        replace_product_name = (split_product.replace('[', '')).replace(']', '')
+                        product_obj = self.env['product.product'].search([('default_code', '=', replace_product_name)])
+                        if product_obj:
+                            product = product_obj.id
+                        else:
+                            product = None
+                    else:
+                        product = None
+
+                    # Pengambilan data description
+                    desc = row['Description'].strip()
+
+                    # Pengambilan data quantity
+                    check_quantity = row['Quantity']
+                    if check_quantity != '':
+                        quantity = float(check_quantity)
+                    else:
+                        quantity = 0.0
+
+                    # Pengambilan data uom
+                    check_uom = row['Uom'].strip()
+                    if check_uom != '':
+                        uom_obj = self.env['uom.uom'].search([('name', '=', check_uom)])
+                        if uom_obj:
+                            uom = uom_obj
+                        else:
+                            uom = None
+                    else:
+                        uom = None
+                    
+                    # Pengambilan data price
+                    check_price = row['Price']
+                    if check_price != '':
+                        price = float(check_price)
+                    else:
+                        price = 0.0
+
+                    # Penyatuan semua value
+                    # pada many2many, ada beberapa kode angka [(x, 0, brands)]
+                    # 0 = create
+                    # 1 = update
+                    # 2 = remove
+                    # 3 = cut dari beberapa object
+                    # 4 = link ke existing record
+                    # 5 = delete all
+                    # 6 = replace
+                    value_header = {
+                        'tanggal': tanggal,
+                        'brand_ids': [(6, 0, brands)],
+                        'algoritma_pembelian_ids': [(0, 0, {
+                            'product_id': product,
+                            'description': desc,
+                            'quantity': quantity,
+                            'uom_id': uom,
+                            'price': price
+                        })]
+                    }
+                    new_algoritma_pembelian_id = algoritma_pembelian_obj.create(value_header)
+                    
+                tree_view_id = self.env['ir.model.data']._xmlid_to_res_id('algoritma_pembelian.algoritma_pembelian_tree_view_id')
+                form_view_id = self.env['ir.model.data']._xmlid_to_res_id('algoritma_pembelian.algoritma_pembelian_form_view_id')
+                return {
+                    'name': 'Algoritma Pembelian',
+                    'view_type': 'form',
+                    'view_mode': 'tree,form',
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'algoritma.pembelian',
+                    'views': [[tree_view_id, 'tree'], [form_view_id, 'form']]
+                }

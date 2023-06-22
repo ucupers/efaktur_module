@@ -187,4 +187,23 @@
             </xpath>
         </field>
     </record>
+
+    <!--view untuk import algoritma pembelian-->
+    <record id="import_algoritma_pembelian_id" model="ir.ui.view">  
+        <field name="name">import_algoritma_pembelian_id</field>
+        <field name="model">base_import.import</field>
+        <field name="arch" type="xml">
+            <form string="Import Algoritma Pembelian">
+                <div style="padding-left: 5px;">
+                    <field name="file_import" required="1" filename="file_name_import"/>
+                    <field name="file_name_import" invisible="1"/>
+                    Or <a href="../algoritma_pembelian/static/template/algoritma_pembelian_template.xlsx" target="_new">Download Template</a>
+                </div>
+                <footer>
+                    <button string="Import" name="action_import_algoritma_pembelian" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 </odoo>

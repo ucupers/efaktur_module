@@ -78,4 +78,13 @@
         <field name="state">code</field>
         <field name="code">action=model.show_tree_view()</field>
     </record>
+
+    <record id="pembelian_actions_import_id" model="ir.actions.act_window">
+        <field name="name">Import Algoritma Pembelian</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">base_import.import</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="algoritma_pembelian.import_algoritma_pembelian_id"/>
+        <field name="target">new</field>
+    </record>
 </odoo>
