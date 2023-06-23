@@ -241,7 +241,7 @@ class base_import(models.TransientModel):
                     if check_uom != '':
                         uom_obj = self.env['uom.uom'].search([('name', '=', check_uom)])
                         if uom_obj:
-                            uom = uom_obj
+                            uom = uom_obj.id
                         else:
                             uom = None
                     else:

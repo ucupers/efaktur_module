@@ -6,6 +6,7 @@ class algoritma_pembelian(models.Model):
 
     def custom_button(self):
         # ambil buttonnya doang
+
         return{
             'type': 'ir.actions.act_url',
             'url': '/algoritma_pembelian/algoritma_pembelian_report_csv/%s' % (self.id),

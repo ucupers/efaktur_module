@@ -68,7 +68,7 @@ class ReportCSVAlgoritmaPembelianController(http.Controller):
                 datastring.append('"'+str(line.uom_id.name)+'"')
                 datastring.append('"'+str(line.price)+'"')
                 datastring.append('"'+str(line.sub_total)+'"')
-            csv_writer.writerow(datastring)
+                csv_writer.writerow(datastring)
                 
         
         # Memasukkan file excel yang sudah digenerate ke response dan return
