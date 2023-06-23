@@ -34,8 +34,11 @@ import io
 import csv
 
 class ReportCSVAlgoritmaPembelianController(http.Controller):
-    @http.route(['/algoritma_pembelian/algoritma_pembelian_report_csv/<model("algoritma.pembelian"):data>',], type="http", auth="user", csrf=False)
-    def get_algoritma_pembelian_csv_report(self, data=None, **args):
+    @http.route('/algoritma_pembelian/algoritma_pembelian_report_csv', type='http', auth='user', csrf=False)
+    def algoritma_pembelian_report_csv(self, **kwargs):
+        data_ids = kwargs.get('id')
+
+        # handle header dari httprequest
         response = request.make_response(
             None,
             headers=[
@@ -44,6 +47,7 @@ class ReportCSVAlgoritmaPembelianController(http.Controller):
                 ('Content-Disposition', content_disposition('Algoritma Pembelian Report' + '.csv'))
             ]
         )
+        
 
         # Buat object workbook dari library xlsxwriter
         output = io.StringIO()
@@ -55,20 +59,38 @@ class ReportCSVAlgoritmaPembelianController(http.Controller):
         csv_writer.writerow(headerjual3)
 
         # Looping algoritma pembelian yang dipilih
-        for atas in data:
+        if data_ids:
+            id_list = data_ids.split(',')  # Split the comma-separated IDs into a list
+            for data_id in id_list:
+                # Retrieve the record algoritma pembelian using the ID
+                record_line = request.env['algoritma.pembelian.line'].search([('algoritma_pembelian_id', '=', int(data_id))])
+                
+                for line in record_line:
+                    # Content / isi table
+                    datastring = ['OF']
+                    datastring.append('"'+str(line.product_id.display_name)+'"')
+                    datastring.append('"'+str(line.description)+'"')
+                    datastring.append('"'+str(line.quantity)+'"')
+                    datastring.append('"'+str(line.uom_id.name)+'"')
+                    datastring.append('"'+str(line.price)+'"')
+                    datastring.append('"'+str(line.sub_total)+'"')
+                    csv_writer.writerow(datastring)
 
-            # Cari record data algoritma pembelian line yang dipilih user
-            record_line = request.env['algoritma.pembelian.line'].search([('algoritma_pembelian_id', '=', atas.id)])
-            for line in record_line:
-                # Content / isi table
-                datastring = ['OF']
-                datastring.append('"'+str(line.product_id.display_name)+'"')
-                datastring.append('"'+str(line.description)+'"')
-                datastring.append('"'+str(line.quantity)+'"')
-                datastring.append('"'+str(line.uom_id.name)+'"')
-                datastring.append('"'+str(line.price)+'"')
-                datastring.append('"'+str(line.sub_total)+'"')
-                csv_writer.writerow(datastring)
+
+        # for data in data_record:
+
+        #     # Cari record data algoritma pembelian line yang dipilih user
+        #     record_line = request.env['algoritma.pembelian.line'].search([('algoritma_pembelian_id', '=', data.id)])
+        #     for line in record_line:
+        #         # Content / isi table
+        #         datastring = ['OF']
+        #         datastring.append('"'+str(line.product_id.display_name)+'"')
+        #         datastring.append('"'+str(line.description)+'"')
+        #         datastring.append('"'+str(line.quantity)+'"')
+        #         datastring.append('"'+str(line.uom_id.name)+'"')
+        #         datastring.append('"'+str(line.price)+'"')
+        #         datastring.append('"'+str(line.sub_total)+'"')
+        #         csv_writer.writerow(datastring)
                 
         
         # Memasukkan file excel yang sudah digenerate ke response dan return
