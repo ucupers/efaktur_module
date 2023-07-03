@@ -275,6 +275,19 @@ class base_import(models.TransientModel):
                         })]
                     }
                     new_algoritma_pembelian_id = algoritma_pembelian_obj.create(value_header)
+
+                    # # line di bawah sampai .create(new_value) untuk nambah line product jadinya nanti lebih dari satu
+                    # algoritma_line_obj = self.env['algoritma.pembelian.line']
+                    # new_value = {
+                    #     'algoritma_pembelian_id' : new_algoritma_pembelian_id.id,
+                    #     'product_id': product,
+                    #     'description': desc,
+                    #     'quantity': quantity,
+                    #     'uom_id': uom,
+                    #     'price': price
+                    # }
+                    # new_algoritma_line_id = algoritma_line_obj.create(new_value)
+                    
                     
                 tree_view_id = self.env['ir.model.data']._xmlid_to_res_id('algoritma_pembelian.algoritma_pembelian_tree_view_id')
                 form_view_id = self.env['ir.model.data']._xmlid_to_res_id('algoritma_pembelian.algoritma_pembelian_form_view_id')
