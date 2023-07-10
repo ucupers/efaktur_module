@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <menuitem 
+        id="efaktur_id"
+        name="e-Faktur"
+        sequence="5"
+        parent="account.menu_finance"/>
+        <menuitem 
+            id="faktur_keluaran_id"
+            name="Faktur Keluaran"
+            sequence="51"
+            parent="efaktur.efaktur_id"
+            action="efaktur.faktur_keluaran_action_id"/>
+        <menuitem 
+            id="faktur_masukan_id"
+            name="Faktur Masukan"
+            sequence="52"
+            parent="efaktur.efaktur_id"
+            action="efaktur.faktur_masukan_action_id"/>
+        <menuitem 
+            id="retur_faktur_keluaran_id"
+            name="Retur Faktur Keluaran"
+            sequence="53"
+            parent="efaktur.efaktur_id"
+            action="efaktur.retur_faktur_keluaran_action_id"/>
+        <menuitem 
+            id="retur_faktur_masukan_id"
+            name="Retur Faktur Masukan"
+            sequence="54"
+            parent="efaktur.efaktur_id"
+            action="efaktur.retur_faktur_masukan_action_id"/>
+</odoo>
