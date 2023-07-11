@@ -11,7 +11,7 @@ class AccountMove(models.Model):
 
     test = fields.Char(string='test', default="New") # Char untuk String
     
-    def export_invoice_csv(self):
+    def export_efaktur_csv(self):
         record_ids = self.ids if hasattr(self, 'ids') else [self.id]
         
         return {
