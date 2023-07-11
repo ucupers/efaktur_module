@@ -11,9 +11,10 @@
     'depends' : ['l10n_id_efaktur'],
     'data' : [
         'security/ir.model.access.csv',
-        'views/algoritma_pembelian_view.xml',
-        'views/algoritma_pembelian_action.xml',
-        'views/algoritma_pembelian_menuitem.xml'
+        'views/faktur_keluaran_view.xml',
+        'views/faktur_masukan_view.xml',
+        'views/retur_faktur_keluaran_view.xml',
+        'views/retur_faktur_masukan_view.xml'
     ],
     'installable' : True,
     'application' : True,
