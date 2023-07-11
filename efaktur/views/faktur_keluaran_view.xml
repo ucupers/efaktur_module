@@ -44,6 +44,8 @@
                 name="Faktur Keluaran"
                 sequence="1"
                 groups="account.group_account_manager"
-                parent="efaktur.efaktur_menu_id"/>
+                parent="efaktur.efaktur_menu_id"
+                action="efaktur.faktur_keluaran_actions_id"/>
+
     </data>
 </odoo>
