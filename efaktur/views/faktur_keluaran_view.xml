@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="efaktur_actions_id" model="ir.actions.act_window">
+            <field name="name">Efaktur</field>
+            <field name="res_model">account.move</field>
+            <!--di bawah ini untuk memasukan domain ke action-->
+    <!--    <field name="domain">[('status', '=', 'draft')]</field> -->
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_group_status': 1}</field>
+            <field name="search_view_id" ref="algoritma_pembelian.algoritma_pembelian_search_view_id"/>
+        </record>
+    
+        <!--set action untuk tree view untuk melihat data tabel-->
+        <record id="pembelian_actions_tree_view_id" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="algoritma_pembelian.algoritma_pembelian_tree_view_id"/>
+            <field name="act_window_id" ref="algoritma_pembelian.pembelian_actions_id"/>
+        </record>
+
+        <record id="faktur_keluaran_tree_view_id" model="ir.ui.view">
+            <field name="name">faktur.keluaran.tree.view.id</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="l10n_id_efaktur.account_move_efaktur_tree_view"/>
+            <field name="arch" type="xml">
+                
+            </field>
+        </record>
+
+        <menuitem 
+            id="efaktur_id"
+            name="e-Faktur"
+            sequence="9"
+            groups="account.group_account_manager"
+            parent="account.menu_finance"/>
+            <menuitem 
+                id="faktur_keluaran_id"
+                name="Faktur Keluaran"
+                sequence="1"
+                groups="account.group_account_manager"
+                parent="efaktur.efaktur_id"/>
+    </data>
+</odoo>
