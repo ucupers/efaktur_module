@@ -14,7 +14,8 @@
         'views/faktur_keluaran_view.xml',
         'views/faktur_masukan_view.xml',
         'views/retur_faktur_keluaran_view.xml',
-        'views/retur_faktur_masukan_view.xml'
+        'views/retur_faktur_masukan_view.xml',
+        'views/faktur_menuitem.xml'
     ],
     'installable' : True,
     'application' : True,

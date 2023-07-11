@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
-    
+    <data>
+        <!--tree view untuk retur faktur keluaran-->
+        <record id="retur_faktur_keluaran_tree_view_id" model="ir.ui.view">
+            <field name="name">retur.faktur.keluaran.tree.view.id</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="l10n_id_efaktur.account_move_efaktur_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="invoice_user_id" position="after">
+                    <field name="l10n_id_tax_number" optional="show"/>
+                    <field name="l10n_id_csv_created" optional="hide"/>
+                </field>
+            </field>
+        </record>
+
+        <!--action id faktur retur faktur keluaran-->
+        <record id="retur_faktur_keluaran_actions_id" model="ir.actions.act_window">
+            <field name="name">Retur Faktur Keluaran</field>
+            <field name="res_model">account.move</field>
+            <field name="domain">[('l10n_id_tax_number', '!=', False), ('move_type', '=', 'out_refund')]</field>
+            <field name="context">{'search_default_group_status': 1}</field>
+            <!--field name="search_view_id" ref="efaktur.retur_faktur_keluaran_search_view_id"/-->
+        </record>
+
+        <!--set action untuk tree view untuk melihat data retur faktur keluaran-->
+        <record id="retur_faktur_keluaran_actions_tree_view_id" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="efaktur.retur_faktur_keluaran_tree_view_id"/>
+            <field name="act_window_id" ref="efaktur.retur_faktur_keluaran_actions_id"/>
+        </record>
+    </data>
 </odoo>

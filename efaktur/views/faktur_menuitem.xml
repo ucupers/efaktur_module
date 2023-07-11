@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <menuitem 
+            id="efaktur_menu_id"
+            name="e-Faktur"
+            sequence="9"
+            groups="account.group_account_manager"
+            parent="account.menu_finance"/>
+            <menuitem 
+                id="faktur_keluaran_menu_id"
+                name="Faktur Keluaran"
+                sequence="1"
+                groups="account.group_account_manager"
+                parent="efaktur.efaktur_menu_id"
+                action="efaktur.faktur_keluaran_actions_id"/>
+            <menuitem 
+                id="faktur_masukan_menu_id"
+                name="Faktur Masukan"
+                sequence="2"
+                groups="account.group_account_manager"
+                parent="efaktur.efaktur_menu_id"
+                action="efaktur.faktur_masukan_actions_id"/>    
+            <menuitem 
+                id="retur_faktur_keluaran_menu_id"
+                name="Retur Faktur Keluaran"
+                sequence="3"
+                groups="account.group_account_manager"
+                parent="efaktur.efaktur_menu_id"
+                action="efaktur.retur_faktur_keluaran_actions_id"/>
+            <menuitem 
+                id="retur_faktur_masukan_menu_id"
+                name="Retur Faktur Masukan"
+                sequence="4"
+                groups="account.group_account_manager"
+                parent="efaktur.efaktur_menu_id"
+                action="efaktur.retur_faktur_masukan_actions_id"/>
+</odoo>
