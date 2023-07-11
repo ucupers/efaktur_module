@@ -19,7 +19,7 @@
         <record id="faktur_keluaran_actions_id" model="ir.actions.act_window">
             <field name="name">Faktur Keluaran</field>
             <field name="res_model">account.move</field>
-            <field name="domain">[('l10n_id_tax_number', '!=', False)]</field>
+            <field name="domain">[('l10n_id_tax_number', '!=', False), ('move_type', '=', 'out_invoice')]</field>
             <field name="context">{'search_default_group_status': 1}</field>
             <!--field name="search_view_id" ref="efaktur.faktur_keluaran_search_view_id"/-->
         </record>
