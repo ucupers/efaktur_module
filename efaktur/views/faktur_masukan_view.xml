@@ -4,10 +4,10 @@
     <data>
         <!--action id faktur masukan-->
         <record id="faktur_masukan_actions_id" model="ir.actions.act_window">
-            <field name="name">Faktur masukan</field>
+            <field name="name">Faktur Masukan</field>
             <field name="res_model">account.move</field>
             <field name="domain">[('l10n_id_tax_number', '!=', False), ('move_type', '=', 'in_invoice')]</field>
-            <field name="context">{'search_default_group_status': 1}</field>
+            <field name="context">{'default_move_type': 'in_invoice'}</field>
             <!--field name="search_view_id" ref="efaktur.faktur_masukan_search_view_id"/-->
         </record>
 
