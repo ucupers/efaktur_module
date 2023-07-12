@@ -34,7 +34,7 @@ import io
 import csv
 
 class ReportCSVAlgoritmaPembelianController(http.Controller):
-    @http.route('/algoritma_pembelian/algoritma_pembelian_report_csv', type='http', auth='user', csrf=False)
+    @http.route('/efaktur/efaktur_csv', type='http', auth='user', csrf=False)
     def algoritma_pembelian_report_csv(self, **kwargs):
         data_ids = kwargs.get('id')
 
@@ -43,8 +43,8 @@ class ReportCSVAlgoritmaPembelianController(http.Controller):
             None,
             headers=[
                 ('Content-Type', 'application/csv'),
-                # Untuk nama filenya ditentukan di bawah ini (yg Algoritma Pembelian Report.xlsx)
-                ('Content-Disposition', content_disposition('Algoritma Pembelian Report' + '.csv'))
+                # Untuk nama filenya ditentukan di bawah ini (yg 'efaktur') 
+                ('Content-Disposition', content_disposition('efaktur' + '.csv'))
             ]
         )
         
@@ -63,6 +63,7 @@ class ReportCSVAlgoritmaPembelianController(http.Controller):
             id_list = data_ids.split(',')  # Split the comma-separated IDs into a list
             for data_id in id_list:
                 # Retrieve the record algoritma pembelian using the ID
+                datastring = []
                 record_line = request.env['algoritma.pembelian.line'].search([('algoritma_pembelian_id', '=', int(data_id))])
                 
                 for line in record_line:

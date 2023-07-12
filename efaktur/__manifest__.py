@@ -11,6 +11,7 @@
     'depends' : ['l10n_id_efaktur'],
     'data' : [
         'security/ir.model.access.csv',
+        'views/account_move_views.xml',
         'views/faktur_keluaran_view.xml',
         'views/faktur_masukan_view.xml',
         'views/retur_faktur_keluaran_view.xml',

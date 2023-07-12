@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="view_account_invoice_tree_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.tree.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <tree >
+                    <header>
+                        <button name="export_efaktur_csv" string="Download CSV" type="object" class="oe_highlight"/>
+                    </header>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+<!-- <odoo>
+    <data>
+        <record id="algoritma_pembelian_tree_view_id" model="ir.ui.view">
+            <field name="name">algoritma_pembelian_tree_view_id</field>
+            <field name="model">algoritma.pembelian</field>
+            <field name="inherit_id" ref="algoritma_pembelian.algoritma_pembelian_tree_view_id"/>
+            <field name="arch" type="xml">
+                <tree >
+                    <header>
+                        <button type="object" name="custom_button" string="Export" class="oe_highlight" />
+                    </header>
+                </tree>
+            </field>
+        </record>
+
+        <record id="custom_algoritma_pembelian_form_view_id" model="ir.ui.view">
+            <field name="name">custom.algoritma_pembelian_form_view</field>
+            <field name="model">algoritma.pembelian</field>
+            <field name="inherit_id" ref="algoritma_pembelian.algoritma_pembelian_form_view_id"/>
+            <field name="arch" type="xml">
+                <sheet>
+                    <field name="test"/>
+                </sheet>
+            </field>
+        </record>
+    </data>
+</odoo> -->
