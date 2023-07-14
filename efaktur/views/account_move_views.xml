@@ -13,13 +13,6 @@
             </field>
         </record>
 
-        <record id="inherit_menu_efaktur" model="ir.ui.menu">
-            <field name="name">Set Tax Id Range</field>
-            <field name="sequence" type="int">10</field>
-            <field name="parent_id" ref="efaktur.efaktur_menu_id"/>
-            <field name="action" ref="l10n_id_efaktur.efaktur_invoice_action"/>
-        </record>
-
         <record id="l10n_id_efaktur.menu_efaktur_action" model="ir.ui.menu">
             <field name="name">E-Faktur</field>
             <field name="active" eval="False"/>

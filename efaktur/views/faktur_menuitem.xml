@@ -35,4 +35,10 @@
                 groups="account.group_account_manager"
                 parent="efaktur.efaktur_menu_id"
                 action="efaktur.retur_faktur_masukan_actions_id"/>
+            <menuitem 
+                id="inherit_menu_efaktur"
+                name="Set Tax Id Range"
+                sequence="10"
+                parent="efaktur.efaktur_menu_id"
+                action="l10n_id_efaktur.efaktur_invoice_action"/>
 </odoo>
