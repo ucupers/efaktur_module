@@ -7,11 +7,9 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_invoice_tree"/>
             <field name="arch" type="xml">
-                <tree >
-                    <header>
-                        <button name="export_efaktur_csv" string="Download CSV" type="object" class="oe_highlight"/>
-                    </header>
-                </tree>
+                <xpath expr="//tree/header" position="inside">
+                    <button name="export_efaktur_csv" string="Download CSV" type="object" class="oe_highlight"/>
+                </xpath>
             </field>
         </record>
 
@@ -20,6 +18,11 @@
             <field name="sequence" type="int">10</field>
             <field name="parent_id" ref="efaktur.efaktur_menu_id"/>
             <field name="action" ref="l10n_id_efaktur.efaktur_invoice_action"/>
+        </record>
+
+        <record id="l10n_id_efaktur.menu_efaktur_action" model="ir.ui.menu">
+            <field name="name">E-Faktur</field>
+            <field name="active" eval="False"/>
         </record>
     </data>
 </odoo>
