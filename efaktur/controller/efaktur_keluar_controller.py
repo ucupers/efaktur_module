@@ -1,7 +1,7 @@
 from odoo import http
 from odoo.http import content_disposition, request
 from odoo.tools import float_round, float_repr
-
+from datetime import date
 import io
 import csv
 
@@ -13,7 +13,7 @@ FM_HEADER_FAKTUR_MASUK = ["FM","KD_JENIS_TRANSAKSI","FG_PENGGANTI","NOMOR_FAKTUR
 RK_HEADER_RETUR_KELUAR = ["RK","NPWP","NAMA","KD_JENIS_TRANSAKSI","FG_PENGGANTI","NOMOR_FAKTUR","TANGGAL_FAKTUR","NOMOR_DOKUMEN_RETUR","TANGGAL_RETUR","MASA_PAJAK_RETUR","TAHUN_PAJAK_RETUR","NILAI_RETUR_DPP","NILAI_RETUR_PPN","NILAI_RETUR_PPNBM"]
 RM_HEADER_RETUR_MASUK = ["RM","NPWP","NAMA","KD_JENIS_TRANSAKSI","FG_PENGGANTI","NOMOR_FAKTUR","TANGGAL_FAKTUR","IS_CREDITABLE","NOMOR_DOKUMEN_RETUR","TANGGAL_RETUR","MASA_PAJAK_RETUR","TAHUN_PAJAK_RETUR","NILAI_RETUR_DPP","NILAI_RETUR_PPN","NILAI_RETUR_PPNBM"]
 
-class ReportCSVEfakturController(http.Controller):
+class ReportCSVEfakturKeluaranController(http.Controller):
     @http.route('/efaktur/efaktur_out_invoice_csv', type='http', auth='user', csrf=False)
     def efaktur_keluar_report_csv(self, **kwargs):
         data_ids = kwargs.get('id')
@@ -24,7 +24,7 @@ class ReportCSVEfakturController(http.Controller):
             headers=[
                 ('Content-Type', 'application/csv'),
                 # Untuk nama filenya ditentukan di bawah ini (yg 'efaktur') 
-                ('Content-Disposition', content_disposition('efaktur' + '.csv'))
+                ('Content-Disposition', content_disposition('efaktur_keluar_'+ str(date.today()).replace("-", "_") + '.csv'))
             ]
         )
 
