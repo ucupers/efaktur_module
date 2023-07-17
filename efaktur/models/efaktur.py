@@ -12,8 +12,8 @@ class AccountMove(models.Model):
 
     def export_efaktur_csv(self):
         
-        # raise exception
-        if self.filtered(lambda x: not x.l10n_id_tax_number):
+        # raise exception 
+        if self.filtered(lambda x: not x.l10n_id_tax_number or not x.l10n_id_tax_number): # change what the second bool check using the name of the new attribute 
             raise UserError(_('Some records don\'t have a Tax Number (nomor faktur)'))
         if self.filtered(lambda x: x.move_type not in ['out_invoice', 'in_invoice', 'out_refund', 'in_refund']):
             raise UserError(_('Some records are not Faktur'))
