@@ -17,34 +17,35 @@
             <field name="name">E-Faktur</field>
             <field name="active" eval="False"/>
         </record>
+
+        <!-- Part that edit the efaktur form spesifically the part where "Electronic Tax" exist -->
+        <record id="account_move_efaktur_form_view" model="ir.ui.view">
+            <field name="name">account.move.efaktur.form.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[field[@name='l10n_id_tax_number']]" position="inside">
+                    <field name="efaktur_is_creditable" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund'))]}"/>
+                </xpath>
+                <data>
+                    <xpath expr="//field[@name='l10n_id_tax_number']" position="replace">
+                        <field name="l10n_id_tax_number" readonly="0"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        
+        <!-- <record id="account_move_efaktur_form_view" model="ir.ui.view">
+            <field name="name">account.move.efaktur.form.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='l10n_id_tax_number']" position="attributes">
+                    <attribute name="attrs">'readonly': '0' </attribute>
+                </xpath>
+            </field>
+        </record> -->
+
     </data>
 </odoo>
-
-
-<!-- <odoo>
-    <data>
-        <record id="algoritma_pembelian_tree_view_id" model="ir.ui.view">
-            <field name="name">algoritma_pembelian_tree_view_id</field>
-            <field name="model">algoritma.pembelian</field>
-            <field name="inherit_id" ref="algoritma_pembelian.algoritma_pembelian_tree_view_id"/>
-            <field name="arch" type="xml">
-                <tree >
-                    <header>
-                        <button type="object" name="custom_button" string="Export" class="oe_highlight" />
-                    </header>
-                </tree>
-            </field>
-        </record>
-
-        <record id="custom_algoritma_pembelian_form_view_id" model="ir.ui.view">
-            <field name="name">custom.algoritma_pembelian_form_view</field>
-            <field name="model">algoritma.pembelian</field>
-            <field name="inherit_id" ref="algoritma_pembelian.algoritma_pembelian_form_view_id"/>
-            <field name="arch" type="xml">
-                <sheet>
-                    <field name="test"/>
-                </sheet>
-            </field>
-        </record>
-    </data>
-</odoo> -->

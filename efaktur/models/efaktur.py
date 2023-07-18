@@ -8,6 +8,9 @@ class AccountMove(models.Model):
     # apa bedanya dengan menggunakan transient model??? -> dbnya secara perodik dihapus
     # klo bukan disini, pindahin semua aja sak class classnya soalnya ni id nempel ke data record kan?
     _inherit = 'account.move'    
+
+    # Attributes
+    efaktur_is_creditable = fields.Boolean(string="Is Creditable", store=True, readonly=False)
     
 
     def export_efaktur_csv(self):
