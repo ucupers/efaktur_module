@@ -18,5 +18,18 @@
             <field name="view_id" ref="l10n_id_efaktur.account_move_efaktur_tree_view"/>
             <field name="act_window_id" ref="efaktur.retur_faktur_keluaran_actions_id"/>
         </record>
+        
+        <!-- Memperbaiki form view untuk akomodasi penambahan atribut -->
+        <record id="view_efaktur_account_move_reversal_inherit" model="ir.ui.view">
+            <field name="name">efaktur.account.move.reversal.inherit.form</field>
+            <field name="model">account.move.reversal</field>
+            <field name="inherit_id" ref="account.view_account_move_reversal"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[field[@name='reason']]" position="inside">
+                    <field name="efaktur_is_creditable" attrs="{'invisible': [('move_type', 'not in', ('in_invoice'))]}"/>
+                    <field name="efaktur_nomor_retur" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund','out_invoice', 'out_refund'))]}"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

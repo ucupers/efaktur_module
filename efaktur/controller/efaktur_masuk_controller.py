@@ -50,7 +50,7 @@ class ReportCSVEfakturKeluaranController(http.Controller):
                 datafm["JUMLAH_DPP"] = '"' + str(int(float_round(move.amount_untaxed, 0))) + '"'
                 datafm["JUMLAH_PPN"] = '"' + str(int(float_round(move.amount_tax, 0, rounding_method="DOWN"))) + '"'
                 datafm["JUMLAH_PPNBM"] = "0"
-                datafm["IS_CREDITABLE"] = "0" # perbaiki mintanya nanti checkbox
+                datafm["IS_CREDITABLE"] = '"' + str(move.efaktur_is_creditable) + '"'
                 csv_writer.writerow(datafm.values())
 
         output.seek(0)

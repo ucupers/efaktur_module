@@ -18,8 +18,8 @@ class AccountMove(models.Model):
     @api.constrains('efaktur_nomor_retur')
     def _constraint_nomor_retur_unique(self):
         # check if efaktur_nomor_field is empty
-        for record in self:
-            if not record.efaktur_nomor_retur:
+        for record in self.filtered('l10n_id_tax_number'):
+            if not record.efaktur_nomor_retur and self.move_type in ["out_refund", "in_refund"]:
                 raise ValidationError('eFaktur Nomor Retur must be filled for the specific move type.')
         
         # constraint nomor retur must unique   
