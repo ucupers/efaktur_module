@@ -22,4 +22,4 @@ class ReturAccountMoveReversal(models.TransientModel):
         
         return default_values
     
-    def _compute_nomor_retur_default()
+    # def _compute_nomor_retur_default()
