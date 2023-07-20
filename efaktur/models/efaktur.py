@@ -1,6 +1,7 @@
 from odoo import models, fields, api, _
 from datetime import date, datetime
 from odoo.exceptions import ValidationError, UserError
+import re
 
 import xlrd, base64, os
 
@@ -11,7 +12,24 @@ class AccountMove(models.Model):
 
     # Attributes
     efaktur_is_creditable = fields.Boolean(string="Is Creditable", store=True, readonly=False)
-    
+    efaktur_nomor_retur = fields.Char(string="Nomor Dokumen Retur", store=True, readonly=False)
+
+
+    @api.constrains('efaktur_nomor_retur')
+    def _constraint_nomor_retur_unique(self):
+        # check if efaktur_nomor_field is empty
+        for record in self:
+            if not record.efaktur_nomor_retur:
+                raise ValidationError('eFaktur Nomor Retur must be filled for the specific move type.')
+        
+        # constraint nomor retur must unique   
+        for record in self.filtered('efaktur_nomor_retur'):
+            if record.search_count([('efaktur_nomor_retur', '=', record.efaktur_nomor_retur)]) > 1:
+                raise ValidationError('The eFaktur Nomor Retur must be unique.')
+            
+    # @api.constrains('efaktur_nomor_retur')
+    # def _constraint_nomor_retur
+
 
     def export_efaktur_csv(self):
         
