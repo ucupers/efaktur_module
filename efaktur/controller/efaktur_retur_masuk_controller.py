@@ -44,7 +44,7 @@ class ReportCSVEfakturKeluaranController(http.Controller):
                 datarm["FG_PENGGANTI"] = '"' + str(move.l10n_id_tax_number[2:3] or 0) + '"' # fix this part when the real taxid column added
                 datarm["NOMOR_FAKTUR"] = '"' + str(move.l10n_id_tax_number[3:] or 0) + '"' # fix this part when the real taxid column added
                 datarm["TANGGAL_FAKTUR"] = '"' + str('{0}/{1}/{2}'.format(move.invoice_date.day, move.invoice_date.month, move.invoice_date.year)) + '"'
-                datarm["IS_CREDITABLE"] = '"' + str(move.efaktur_is_creditable) + '"'
+                datarm["IS_CREDITABLE"] = '"' + str(int(move.efaktur_is_creditable)) + '"'
                 datarm["NOMOR_DOKUMEN_RETUR"] = '"' + str(move.efaktur_nomor_retur) + '"'
                 datarm["TANGGAL_RETUR"] = '"' + str('{0}/{1}/{2}'.format(move.date.day, move.date.month, move.date.year)) + '"'
                 datarm["MASA_PAJAK_RETUR"] = '"' + str(move.date.month) + '"'
