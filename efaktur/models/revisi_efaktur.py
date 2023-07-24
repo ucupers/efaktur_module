@@ -1,3 +1,8 @@
+from odoo import models, fields, api, _
+from datetime import date, datetime
+from odoo.exceptions import ValidationError, UserError
+import re
+
 class RevisiEfaktur(models.Model):
     _inherit = "l10n_id_efaktur.efaktur.range"
 
