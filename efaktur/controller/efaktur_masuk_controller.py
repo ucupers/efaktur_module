@@ -8,7 +8,7 @@ import csv
 # Header faktur
 FM_HEADER_FAKTUR_MASUK = ["FM","KD_JENIS_TRANSAKSI","FG_PENGGANTI","NOMOR_FAKTUR","MASA_PAJAK","TAHUN_PAJAK","TANGGAL_FAKTUR","NPWP","NAMA","ALAMAT_LENGKAP","JUMLAH_DPP","JUMLAH_PPN","JUMLAH_PPNBM","IS_CREDITABLE"]
 
-class ReportCSVEfakturKeluaranController(http.Controller):
+class ReportCSVEfakturMasukanController(http.Controller):
     @http.route('/efaktur/efaktur_in_invoice_csv', http='http', auth='user', csrf=False)
     def efaktur_masuk_report_csv(self, **kwargs):
         data_ids = kwargs.get('id')

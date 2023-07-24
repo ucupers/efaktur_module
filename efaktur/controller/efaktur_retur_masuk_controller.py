@@ -8,7 +8,7 @@ import csv
 # Header faktur
 RM_HEADER_RETUR_MASUK = ["RM","NPWP","NAMA","KD_JENIS_TRANSAKSI","FG_PENGGANTI","NOMOR_FAKTUR","TANGGAL_FAKTUR","IS_CREDITABLE","NOMOR_DOKUMEN_RETUR","TANGGAL_RETUR","MASA_PAJAK_RETUR","TAHUN_PAJAK_RETUR","NILAI_RETUR_DPP","NILAI_RETUR_PPN","NILAI_RETUR_PPNBM"]
 
-class ReportCSVEfakturKeluaranController(http.Controller):
+class ReportCSVReturMasukanController(http.Controller):
     @http.route('/efaktur/efaktur_in_refund_csv', http='http', auth='user', csrf=False)
     def retur_masuk_report_csv(self, **kwargs):
         data_ids = kwargs.get('id')
