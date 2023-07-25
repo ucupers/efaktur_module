@@ -1,9 +1,11 @@
 from odoo import models, fields, api, _
 from datetime import date, datetime
 from odoo.exceptions import ValidationError, UserError
-import re
 
-import xlrd, base64, os
+import re
+import xlrd
+import base64
+import os
 
 class ReturAccountMoveReversal(models.TransientModel):
     _inherit = 'account.move.reversal'

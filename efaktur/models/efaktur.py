@@ -1,9 +1,11 @@
 from odoo import models, fields, api, _
 from datetime import date, datetime
 from odoo.exceptions import ValidationError, UserError
-import re
 
-import xlrd, base64, os
+import re
+import xlrd
+import base64
+import os
 
 class AccountMove(models.Model):
     # apa bedanya dengan menggunakan transient model??? -> dbnya secara perodik dihapus
@@ -34,7 +36,7 @@ class AccountMove(models.Model):
     def export_efaktur_csv(self):
         
         # raise exception 
-        if self.filtered(lambda x: not x.l10n_id_tax_number or not x.l10n_id_tax_number): # change what the second bool check using the name of the new attribute 
+        if self.filtered(lambda x: not x.l10n_id_tax_number):
             raise UserError(_('Some records don\'t have a Tax Number (nomor faktur)'))
         if self.filtered(lambda x: x.move_type not in ['out_invoice', 'in_invoice', 'out_refund', 'in_refund']):
             raise UserError(_('Some records are not Faktur'))
